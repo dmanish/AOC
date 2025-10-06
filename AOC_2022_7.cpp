@@ -82,7 +82,6 @@ public:
         return total;
     }
 
-    
     void printDirectories() {
         cout << "\nDirectory sizes:" << endl;
         for (const auto& [path, size] : dirsizes) {
@@ -90,6 +89,27 @@ public:
         }
     }
 
+    long long part2() {
+        const long long TOTAL_SPACE = 70000000;
+        const long long NEEDED_SPACE = 30000000;
+        
+        long long usedspace = dirsizes["/"];
+        long long freespace = TOTAL_SPACE - usedspace;
+        long long needtofree = NEEDED_SPACE - freespace;
+        
+        if (needtofree <= 0) {
+            return 0; 
+        }
+        
+        long long minsize = TOTAL_SPACE;
+        for (const auto& [path, size] : dirsizes) {
+            if (size >= needtofree && size < minsize) {
+                minsize = size;
+            }
+        }
+        
+        return minsize;
+    }
 
 };
 
@@ -97,7 +117,7 @@ int main() {
     filesystem fs;
     string line;
 
-    cout << "Enter terminal output (Ctrl+D or Ctrl+Z to end input):" << endl;
+    cout << "Enter terminal output (Ctrl+D to end input):" << endl;
 
     while (getline(cin, line)) {
         if (!line.empty()) {
@@ -109,6 +129,7 @@ int main() {
 
     cout << "\n=== Results ===" << endl;
     cout << "Part 1 (sum of directories <= 100000): " << fs.part1() << endl;
+    cout << "Part 2 (smallest directory to delete): " << fs.part2() << endl;
 
     return 0;
 }
