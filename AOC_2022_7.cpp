@@ -82,12 +82,12 @@ public:
         return total;
     }
 
-    void printDirectories() {
+    /*void printDirectories() {
         cout << "\nDirectory sizes:" << endl;
         for (const auto& [path, size] : dirsizes) {
             cout << path << ": " << size << endl;
         }
-    }
+    }*/
 
     long long part2() {
         const long long TOTAL_SPACE = 70000000;
@@ -125,7 +125,7 @@ int main() {
         }
     }
 
-    fs.printDirectories();
+    //fs.printDirectories();
 
     cout << "\n=== Results ===" << endl;
     cout << "Part 1 (sum of directories <= 100000): " << fs.part1() << endl;
